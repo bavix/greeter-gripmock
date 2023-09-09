@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  greeter:
+    image: bavix/greeter-client:1
+    depends_on:
+      gripmock:
+        condition: service_healthy
+    command:
+      - -addr=gripmock:4770
+      - -name=gripmock
+    networks:
+      - bx-greeter
+
+  gripmock:
+    image: bavix/gripmock:2
+    ports:
+      - 4770:4770
+      - 4771:4771
+    healthcheck:
+      test: "curl --connect-timeout 1 --silent --show-error --fail http://gripmock:4771/api/health/readiness"
+      timeout: 1s
+      interval: 1s
+      start_period: 1s
+      retries: 10
+    command:
+      - -stub=/stubs
+      - /proto/helloworld.proto
+    volumes:
+      - ./stubs:/stubs:ro
+      - ./api:/proto:ro
+    networks:
+      - bx-greeter
+
+networks:
+  bx-greeter:
