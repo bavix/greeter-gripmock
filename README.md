@@ -162,8 +162,3 @@ Aborting on container exit...
  ```
 
 In the pipeline, you can operate with the code returned from docker compose and, if a non-zero value is received, mark the test as failed.
-
----
-Supported by
-
-[![Supported by JetBrains](https://cdn.rawgit.com/bavix/development-through/46475b4b/jetbrains.svg)](https://www.jetbrains.com/)
