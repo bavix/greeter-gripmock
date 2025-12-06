@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Integration test
         run: docker compose -f docker-compose.test.yaml up --abort-on-container-exit --exit-code-from greeter
